@@ -2,9 +2,9 @@
 #include <string.h>
 #include <memory.h>
 
-//#define N 5
-//#define N1 2
-//#define N2 3
+// #define N 5
+// #define N1 2
+// #define N2 3
 
 typedef struct
 {
@@ -63,17 +63,17 @@ int pack_student_whole(student *s, int sno, char *buf)
         int remarkLenth = strlen(s[i].remark) + 1;
         packedLen += nameLength + ageLength + scoreLength + remarkLenth;
 
-        strcpy(buf, s[i].name);
-        index += strlen(s[i].name) + 1;
+        strcpy(buf + index, s[i].name);
+        index += nameLength;
 
-        memcpy(buf + index, &s[i].age, 2);
-        index += 2;
+        memcpy(buf + index, &s[i].age, ageLength);
+        index += ageLength;
 
-        memcpy(buf + index, &s[i].score, 4);
-        index += 4;
+        memcpy(buf + index, &s[i].score, scoreLength);
+        index += scoreLength;
 
         strcpy(buf + index, s[i].remark);
-        index += strlen(s[i].name) + 1;
+        index += remarkLenth;
     }
 
     return packedLen;
@@ -86,21 +86,36 @@ int restore_student(char *buf, int len, student *s)
     int index = 0, sno = 0;
     while (index + 1 + 2 + 4 + 1 <= len)
     {
-        for (int elemNum = 0; elemNum < 4; elemNum++)
-        {
-            strcpy(s[sno].age, buf + index);
-            index += strlen(buf + index) + 1;
+        int remaining = len - index;
+        int nameLen = strnlen(buf + index, remaining);
+        if (nameLen >= remaining)
+            break;
+        if (nameLen >= (int)sizeof(s[sno].name))
+            nameLen = sizeof(s[sno].name) - 1;
+        memcpy(s[sno].name, buf + index, nameLen);
+        s[sno].name[nameLen] = '\0';
+        index += strnlen(buf + index, remaining) + 1;
 
-            memcpy(&s[sno].age, buf + index, 2);
-            index += 2;
+        if (index + (int)sizeof(s[sno].age) + (int)sizeof(s[sno].score) + 1 > len)
+            break;
 
-            memcpy(&s[sno].score, buf + index, 4);
-            index += 4;
+        memcpy(&s[sno].age, buf + index, sizeof(s[sno].age));
+        index += sizeof(s[sno].age);
 
-            strcpy(s[sno].remark, buf + index);
-            index += strlen(s[sno].remark) + 1;
-        }
+        memcpy(&s[sno].score, buf + index, sizeof(s[sno].score));
+        index += sizeof(s[sno].score);
+
+        remaining = len - index;
+        int remarkLen = strnlen(buf + index, remaining);
+        if (remarkLen >= remaining)
+            break;
+        if (remarkLen >= (int)sizeof(s[sno].remark))
+            remarkLen = sizeof(s[sno].remark) - 1;
+        memcpy(s[sno].remark, buf + index, remarkLen);
+        s[sno].remark[remarkLen] = '\0';
+        index += strnlen(buf + index, remaining) + 1;
+
+        sno++;
     }
     return sno;
 }
-

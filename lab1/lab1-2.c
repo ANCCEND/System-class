@@ -1,83 +1,95 @@
+#include <limits.h>
 #include <stdio.h>
-#include <string.h>
-#include <memory.h>
 
-#define N 5
-#define N1 2
-#define N2 3
+#include "./lab1-2.h"
 
-int absVal(int x)
+static int g_total = 0;
+static int g_pass = 0;
+
+static void check_int(const char *name, int got, int expect)
 {
-    return (x ^ x >> 31) + (~(x >> 31) + 1);
+    g_total++;
+    if (got == expect)
+    {
+        g_pass++;
+        printf("[PASS] %-24s got=%d\n", name, got);
+    }
+    else
+    {
+        printf("[FAIL] %-24s got=%d expect=%d\n", name, got, expect);
+    }
 }
 
-int negate(int x)
+static unsigned ref_bitMask(int highbit, int lowbit)
 {
-    return ~x + 1;
+    if (highbit < lowbit)
+        return 0u;
+
+    {
+        unsigned all = ~0u;
+        unsigned left = all << lowbit;
+        unsigned right = (highbit == 31) ? all : ~(all << (highbit + 1));
+        return left & right;
+    }
 }
 
-int bitAnd(int x, int y)
+static int ref_addOK(int x, int y)
 {
-    return ~(~x | ~y);
+    long long s = (long long)x + (long long)y;
+    return (s <= INT_MAX && s >= INT_MIN) ? 1 : 0;
 }
 
-int bitOr(int x, int y)
+static int ref_parity(int x)
 {
-    return ~(~x & ~y);
+    unsigned u = (unsigned)x;
+    int p = 0;
+    while (u)
+    {
+        p ^= (int)(u & 1u);
+        u >>= 1;
+    }
+    return p;
 }
 
-int bitXor(int x, int y)
+int main(void)
 {
-    return ~(~(~x & y) & ~(x & ~y));
-}
+    check_int("negate(5)", negate(5), -5);
+    check_int("negate(-7)", negate(-7), 7);
 
-int isTmax(int x)
-{
-    return !(~x ^ (x + 1));
-}
+    check_int("absVal(123)", absVal(123), 123);
+    check_int("absVal(-123)", absVal(-123), 123);
 
-int bitCount(int x)
-{
-    x = (x & 0x55555555) + ((x >> 1) & 0x55555555);
-    x = (x & 0x33333333) + ((x >> 2) & 0x33333333);
-    x = (x & 0x0f0f0f0f) + ((x >> 4) & 0x0f0f0f0f);
-    x = (x & 0x00ff00ff) + ((x >> 8) & 0x00ff00ff);
-    x = (x & 0x0000ffff) + ((x >> 16) & 0x0000ffff);
-    return x;
-}
+    check_int("bitAnd", bitAnd(0x5A, 0x3C), (0x5A & 0x3C));
+    check_int("bitOr", bitOr(0x5A, 0x3C), (0x5A | 0x3C));
+    check_int("bitXor", bitXor(0x5A, 0x3C), (0x5A ^ 0x3C));
 
-int bitMask(int highbit, int lowbit)
-{
-    return 0xFFFFFFFF << lowbit & ~(0xFFFFFFFF << highbit);
-}
+    check_int("isTmax(INT_MAX)", isTmax(INT_MAX), 1);
+    check_int("isTmax(-1)", isTmax(-1), 0);
+    check_int("isTmax(0)", isTmax(0), 0);
 
-int addOK(int x, int y)
-{
-    return (~(x >> 31 ^ y >> 31) & (x >> 31 ^ (x + y) >> 31));
-}
+    check_int("bitCount(0)", bitCount(0), 0);
+    check_int("bitCount(-1)", bitCount(-1), 32);
+    check_int("bitCount(0xF0F0)", bitCount(0xF0F0), 8);
 
-int bitSwap(int x, int n, int m)
-{
-    int byte_n = (x >> (n << 3)) & 0xFF;
-    int byte_m = (x >> (m << 3)) & 0xFF;
+    check_int("bitMask(3,1)", bitMask(3, 1), (int)ref_bitMask(3, 1));
+    check_int("bitMask(31,0)", bitMask(31, 0), (int)ref_bitMask(31, 0));
+    check_int("bitMask(2,5)", bitMask(2, 5), (int)ref_bitMask(2, 5));
 
-    int mask = (0xFF << (n << 3)) | (0xFF << (m << 3));
-    int x_cleared = x & ~mask;
+    check_int("addOK(INT_MAX,1)", addOK(INT_MAX, 1), ref_addOK(INT_MAX, 1));
+    check_int("addOK(INT_MIN,-1)", addOK(INT_MIN, -1), ref_addOK(INT_MIN, -1));
+    check_int("addOK(123,456)", addOK(123, 456), ref_addOK(123, 456));
 
-    return x_cleared | (byte_n << (m << 3)) | (byte_m << (n << 3));
-}
+    check_int("bitSwap", bitSwap(0x12345678, 0, 2), 0x12785634);
+    check_int("bitSwap(same)", bitSwap(0x12345678, 1, 1), 0x12345678);
 
-int bang(int x)
-{
-    return (unsigned)~(x >> 31 | (~x + 1) >> 31) >> 31;
-}
+    check_int("bang(0)", bang(0), 1);
+    check_int("bang(5)", bang(5), 0);
+    check_int("bang(-7)", bang(-7), 0);
 
-int bitParity(int x)
-{
-    x ^= x >> 16;
-    x ^= x >> 8;
-    x ^= x >> 4;
-    x ^= x >> 2;
-    x ^= x >> 1;
-    return x & 1;
+    check_int("bitParity(0)", bitParity(0), ref_parity(0));
+    check_int("bitParity(7)", bitParity(7), ref_parity(7));
+    check_int("bitParity(-1)", bitParity(-1), ref_parity(-1));
+
+    printf("\nSummary: %d/%d passed.\n", g_pass, g_total);
+    return (g_pass == g_total) ? 0 : 1;
 }
