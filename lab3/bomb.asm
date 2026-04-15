@@ -685,21 +685,21 @@ Disassembly of section .text:
     19a1:	48 83 ec 20          	sub    $0x20,%rsp
     19a5:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
     19a9:	0f b6 05 f1 2a 00 00 	movzbl 0x2af1(%rip),%eax        # 44a1 <studentid+0x9>
-    19b0:	83 e8 30             	sub    $0x30,%eax               # eax=x-'0'
+    19b0:	83 e8 30             	sub    $0x30,%eax               # eax = x-'0'
     19b3:	88 45 fb             	mov    %al,-0x5(%rbp)
     19b6:	0f be 45 fb          	movsbl -0x5(%rbp),%eax
     19ba:	89 45 fc             	mov    %eax,-0x4(%rbp)
     19bd:	8b 55 fc             	mov    -0x4(%rbp),%edx
     19c0:	48 89 d0             	mov    %rdx,%rax
     19c3:	48 c1 e0 02          	shl    $0x2,%rax
-    19c7:	48 01 d0             	add    %rdx,%rax                # rax=5x
-    19ca:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx        # rdx=20x
+    19c7:	48 01 d0             	add    %rdx,%rax                # rax = 5x
+    19ca:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx        # rdx = 20x
     19d1:	00 
-    19d2:	48 01 d0             	add    %rdx,%rax                # rax=25x
-    19d5:	48 01 c0             	add    %rax,%rax                # rax=50x
+    19d2:	48 01 d0             	add    %rdx,%rax                # rax = 25x
+    19d5:	48 01 c0             	add    %rax,%rax                # rax = 50x
     19d8:	48 8d 15 41 26 00 00 	lea    0x2641(%rip),%rdx        # 4020 <special> rdx=4020
-    19df:	48 01 c2             	add    %rax,%rdx                # rdx=50x+4020
-    19e2:	48 8b 45 e8          	mov    -0x18(%rbp),%rax         # rax=arg
+    19df:	48 01 c2             	add    %rax,%rdx                # rdx = 50x+4020
+    19e2:	48 8b 45 e8          	mov    -0x18(%rbp),%rax         # rax = arg
     19e6:	48 89 d6             	mov    %rdx,%rsi
     19e9:	48 89 c7             	mov    %rax,%rdi
     19ec:	e8 b2 fc ff ff       	call   16a3 <strings_not_equal>
@@ -716,57 +716,57 @@ Disassembly of section .text:
     1a02:	48 89 e5             	mov    %rsp,%rbp
     1a05:	48 83 ec 40          	sub    $0x40,%rsp
     1a09:	48 89 7d c8          	mov    %rdi,-0x38(%rbp)
-    1a0d:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax            
+    1a0d:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax            # “金丝雀”
     1a14:	00 00 
     1a16:	48 89 45 f8          	mov    %rax,-0x8(%rbp)          # 防止栈溢出
-    1a1a:	31 c0                	xor    %eax,%eax                # eax=0
-    1a1c:	48 8d 55 e0          	lea    -0x20(%rbp),%rdx         # rdx=rbp-0x20
-    1a20:	48 8b 45 c8          	mov    -0x38(%rbp),%rax         # rax=rbp-0x38
-    1a24:	48 89 d6             	mov    %rdx,%rsi                # rsi=rbp-0x20
-    1a27:	48 89 c7             	mov    %rax,%rdi                # rdi=rbp-0x20
+    1a1a:	31 c0                	xor    %eax,%eax                # eax = 0
+    1a1c:	48 8d 55 e0          	lea    -0x20(%rbp),%rdx         # rdx = a[0]
+    1a20:	48 8b 45 c8          	mov    -0x38(%rbp),%rax         # rax = rbp-0x38
+    1a24:	48 89 d6             	mov    %rdx,%rsi                # rsi = a[0]
+    1a27:	48 89 c7             	mov    %rax,%rdi                # rdi = input[0]
     1a2a:	e8 cf fb ff ff       	call   15fe <read_six_numbers>
     1a2f:	8b 45 e0             	mov    -0x20(%rbp),%eax
     1a32:	85 c0                	test   %eax,%eax
     1a34:	79 05                	jns    1a3b <phase_2+0x3e>
     1a36:	e8 3d ff ff ff       	call   1978 <explode_bomb>
-    1a3b:	8b 45 e0             	mov    -0x20(%rbp),%eax         # eax=rbp-0x20
+    1a3b:	8b 45 e0             	mov    -0x20(%rbp),%eax         # eax = a[0]
     1a3e:	0f b6 15 5c 2a 00 00 	movzbl 0x2a5c(%rip),%edx        # 44a1 <studentid+0x9> edx='2'
-    1a45:	0f be d2             	movsbl %dl,%edx                 # edx='2'
-    1a48:	83 ea 30             	sub    $0x30,%edx               # edx=0x2
-    1a4b:	39 d0                	cmp    %edx,%eax                # cmp 0x2,rbp-0x20
+    1a45:	0f be d2             	movsbl %dl,%edx                 # edx = '2'
+    1a48:	83 ea 30             	sub    $0x30,%edx               # edx = 0x2
+    1a4b:	39 d0                	cmp    %edx,%eax                # cmp 0x2,a[0]
     1a4d:	74 05                	je     1a54 <phase_2+0x57>
     1a4f:	e8 24 ff ff ff       	call   1978 <explode_bomb>
     1a54:	8b 45 e4             	mov    -0x1c(%rbp),%eax
     1a57:	0f b6 15 42 2a 00 00 	movzbl 0x2a42(%rip),%edx        # 44a0 <studentid+0x8>
     1a5e:	0f be d2             	movsbl %dl,%edx
-    1a61:	83 ea 30             	sub    $0x30,%edx               # edx=0x7
+    1a61:	83 ea 30             	sub    $0x30,%edx               # edx = 0x7
     1a64:	39 d0                	cmp    %edx,%eax
     1a66:	74 05                	je     1a6d <phase_2+0x70>      
     1a68:	e8 0b ff ff ff       	call   1978 <explode_bomb>
-    1a6d:	c7 45 dc 02 00 00 00 	movl   $0x2,-0x24(%rbp)         # rbp-0x24=0x2
+    1a6d:	c7 45 dc 02 00 00 00 	movl   $0x2,-0x24(%rbp)         # i = 0x2
     1a74:	eb 33                	jmp    1aa9 <phase_2+0xac>
-    1a76:	8b 45 dc             	mov    -0x24(%rbp),%eax         # eax=0x2
+    1a76:	8b 45 dc             	mov    -0x24(%rbp),%eax         # eax = i
     1a79:	48 98                	cltq   
-    1a7b:	8b 54 85 e0          	mov    -0x20(%rbp,%rax,4),%edx  # edx= 0x8 + rbp -0x20
-    1a7f:	8b 45 dc             	mov    -0x24(%rbp),%eax         # eax=0x2
-    1a82:	83 e8 01             	sub    $0x1,%eax                # eax=0x1
+    1a7b:	8b 54 85 e0          	mov    -0x20(%rbp,%rax,4),%edx  # edx = a[i]
+    1a7f:	8b 45 dc             	mov    -0x24(%rbp),%eax         # eax = i
+    1a82:	83 e8 01             	sub    $0x1,%eax                # eax = i-1
     1a85:	48 98                	cltq   
-    1a87:	8b 4c 85 e0          	mov    -0x20(%rbp,%rax,4),%ecx  # ecx = 0x4 + rbp -0x20
-    1a8b:	8b 45 dc             	mov    -0x24(%rbp),%eax         # eax=0x2
-    1a8e:	83 e8 02             	sub    $0x2,%eax                # eax=0
+    1a87:	8b 4c 85 e0          	mov    -0x20(%rbp,%rax,4),%ecx  # ecx = a[i-1]
+    1a8b:	8b 45 dc             	mov    -0x24(%rbp),%eax         # eax = i
+    1a8e:	83 e8 02             	sub    $0x2,%eax                # eax = i-2
     1a91:	48 98                	cltq   
-    1a93:	8b 44 85 e0          	mov    -0x20(%rbp,%rax,4),%eax  # eax = rbp -0x20
-    1a97:	01 c8                	add    %ecx,%eax                # eax=rbp-0x36
-    1a99:	83 c0 01             	add    $0x1,%eax                # eax=rbp-0x35
-    1a9c:	39 c2                	cmp    %eax,%edx
+    1a93:	8b 44 85 e0          	mov    -0x20(%rbp,%rax,4),%eax  # eax = a[i-2]
+    1a97:	01 c8                	add    %ecx,%eax                # eax = a[i-1]+a[i-2]
+    1a99:	83 c0 01             	add    $0x1,%eax                # eax = a[i-1]+a[i-2]+1
+    1a9c:	39 c2                	cmp    %eax,%edx                # edx == eax?
     1a9e:	74 05                	je     1aa5 <phase_2+0xa8>
     1aa0:	e8 d3 fe ff ff       	call   1978 <explode_bomb>
-    1aa5:	83 45 dc 01          	addl   $0x1,-0x24(%rbp)         # 
-    1aa9:	83 7d dc 05          	cmpl   $0x5,-0x24(%rbp)         # rbp-0x24==0x5?
-    1aad:	7e c7                	jle    1a76 <phase_2+0x79>
+    1aa5:	83 45 dc 01          	addl   $0x1,-0x24(%rbp)         # i += 0x1
+    1aa9:	83 7d dc 05          	cmpl   $0x5,-0x24(%rbp)         # i == 0x5?
+    1aad:	7e c7                	jle    1a76 <phase_2+0x79>      # i <= 0x5 jump
     1aaf:	90                   	nop
-    1ab0:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
-    1ab4:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
+    1ab0:	48 8b 45 f8          	mov    -0x8(%rbp),%rax          
+    1ab4:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax            # 检查栈溢出
     1abb:	00 00 
     1abd:	74 05                	je     1ac4 <phase_2+0xc7>
     1abf:	e8 6c f6 ff ff       	call   1130 <__stack_chk_fail@plt>
@@ -778,39 +778,39 @@ Disassembly of section .text:
     1aca:	55                   	push   %rbp
     1acb:	48 89 e5             	mov    %rsp,%rbp
     1ace:	48 83 ec 30          	sub    $0x30,%rsp
-    1ad2:	48 89 7d d8          	mov    %rdi,-0x28(%rbp)
+    1ad2:	48 89 7d d8          	mov    %rdi,-0x28(%rbp)         # char* input
     1ad6:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
     1add:	00 00 
-    1adf:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
-    1ae3:	31 c0                	xor    %eax,%eax
-    1ae5:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%rbp)
-    1aec:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%rbp)
-    1af3:	48 8d 4d ec          	lea    -0x14(%rbp),%rcx
-    1af7:	48 8d 55 e8          	lea    -0x18(%rbp),%rdx
-    1afb:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
-    1aff:	48 8d 35 62 08 00 00 	lea    0x862(%rip),%rsi        # 2368 <_IO_stdin_used+0x368>
-    1b06:	48 89 c7             	mov    %rax,%rdi
-    1b09:	b8 00 00 00 00       	mov    $0x0,%eax
+    1adf:	48 89 45 f8          	mov    %rax,-0x8(%rbp)          # stack canary
+    1ae3:	31 c0                	xor    %eax,%eax                # eax = 0
+    1ae5:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%rbp)         # a = 0
+    1aec:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%rbp)          # b = 0
+    1af3:	48 8d 4d ec          	lea    -0x14(%rbp),%rcx         # rcx = d
+    1af7:	48 8d 55 e8          	lea    -0x18(%rbp),%rdx         # rdx = c
+    1afb:	48 8b 45 d8          	mov    -0x28(%rbp),%rax         # rax = input
+    1aff:	48 8d 35 62 08 00 00 	lea    0x862(%rip),%rsi         # 2368 <_IO_stdin_used+0x368>
+    1b06:	48 89 c7             	mov    %rax,%rdi                # rdi = input
+    1b09:	b8 00 00 00 00       	mov    $0x0,%eax                # eax = 0
     1b0e:	e8 4d f6 ff ff       	call   1160 <__isoc99_sscanf@plt>
-    1b13:	89 45 f4             	mov    %eax,-0xc(%rbp)
-    1b16:	83 7d f4 01          	cmpl   $0x1,-0xc(%rbp)
-    1b1a:	7f 05                	jg     1b21 <phase_3+0x5b>
+    1b13:	89 45 f4             	mov    %eax,-0xc(%rbp)          # b = 0
+    1b16:	83 7d f4 01          	cmpl   $0x1,-0xc(%rbp)          # b == 1?
+    1b1a:	7f 05                	jg     1b21 <phase_3+0x5b>      # b > 1 jump
     1b1c:	e8 57 fe ff ff       	call   1978 <explode_bomb>
-    1b21:	0f b6 05 78 29 00 00 	movzbl 0x2978(%rip),%eax        # 44a0 <studentid+0x8>
-    1b28:	0f be c0             	movsbl %al,%eax
-    1b2b:	8d 50 d0             	lea    -0x30(%rax),%edx
-    1b2e:	8b 45 e8             	mov    -0x18(%rbp),%eax
-    1b31:	39 c2                	cmp    %eax,%edx
+    1b21:	0f b6 05 78 29 00 00 	movzbl 0x2978(%rip),%eax        # 44a0 <studentid+0x8> eax = '7'
+    1b28:	0f be c0             	movsbl %al,%eax                 # eax = '7'
+    1b2b:	8d 50 d0             	lea    -0x30(%rax),%edx         # edx = 0x7
+    1b2e:	8b 45 e8             	mov    -0x18(%rbp),%eax         # eax = c
+    1b31:	39 c2                	cmp    %eax,%edx                # c == 0x7
     1b33:	74 05                	je     1b3a <phase_3+0x74>
     1b35:	e8 3e fe ff ff       	call   1978 <explode_bomb>
-    1b3a:	8b 45 e8             	mov    -0x18(%rbp),%eax
-    1b3d:	83 f8 09             	cmp    $0x9,%eax
-    1b40:	77 7d                	ja     1bbf <phase_3+0xf9>
-    1b42:	89 c0                	mov    %eax,%eax
-    1b44:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+    1b3a:	8b 45 e8             	mov    -0x18(%rbp),%eax         # eax = 0x7
+    1b3d:	83 f8 09             	cmp    $0x9,%eax                # c == 0x9
+    1b40:	77 7d                	ja     1bbf <phase_3+0xf9>      # c > 9 jump
+    1b42:	89 c0                	mov    %eax,%eax                # 高位清零
+    1b44:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx        # rdx = 0x1c 
     1b4b:	00 
-    1b4c:	48 8d 05 1d 08 00 00 	lea    0x81d(%rip),%rax        # 2370 <_IO_stdin_used+0x370>
-    1b53:	8b 04 02             	mov    (%rdx,%rax,1),%eax
+    1b4c:	48 8d 05 1d 08 00 00 	lea    0x81d(%rip),%rax        # 2370 <_IO_stdin_used+0x370> 
+    1b53:	8b 04 02             	mov    (%rdx,%rax,1),%eax       # eax = 2370 + 0x1c 0x1c为字节偏移，实际上为28/4=7
     1b56:	48 98                	cltq   
     1b58:	48 8d 15 11 08 00 00 	lea    0x811(%rip),%rdx        # 2370 <_IO_stdin_used+0x370>
     1b5f:	48 01 d0             	add    %rdx,%rax
@@ -829,7 +829,7 @@ Disassembly of section .text:
     1b99:	eb 29                	jmp    1bc4 <phase_3+0xfe>
     1b9b:	c7 45 f0 a9 01 00 00 	movl   $0x1a9,-0x10(%rbp)
     1ba2:	eb 20                	jmp    1bc4 <phase_3+0xfe>
-    1ba4:	c7 45 f0 63 00 00 00 	movl   $0x63,-0x10(%rbp)
+    1ba4:	c7 45 f0 63 00 00 00 	movl   $0x63,-0x10(%rbp)        # d = 0x63 // 99
     1bab:	eb 17                	jmp    1bc4 <phase_3+0xfe>
     1bad:	c7 45 f0 64 00 00 00 	movl   $0x64,-0x10(%rbp)
     1bb4:	eb 0e                	jmp    1bc4 <phase_3+0xfe>
@@ -854,45 +854,45 @@ Disassembly of section .text:
     1bec:	55                   	push   %rbp
     1bed:	48 89 e5             	mov    %rsp,%rbp
     1bf0:	48 83 ec 20          	sub    $0x20,%rsp
-    1bf4:	89 7d ec             	mov    %edi,-0x14(%rbp)
-    1bf7:	89 75 e8             	mov    %esi,-0x18(%rbp)
-    1bfa:	89 55 e4             	mov    %edx,-0x1c(%rbp)
-    1bfd:	8b 45 e4             	mov    -0x1c(%rbp),%eax
-    1c00:	2b 45 e8             	sub    -0x18(%rbp),%eax
-    1c03:	89 c2                	mov    %eax,%edx
-    1c05:	c1 ea 1f             	shr    $0x1f,%edx
-    1c08:	01 d0                	add    %edx,%eax
-    1c0a:	d1 f8                	sar    %eax
-    1c0c:	89 c2                	mov    %eax,%edx
-    1c0e:	8b 45 e8             	mov    -0x18(%rbp),%eax
-    1c11:	01 d0                	add    %edx,%eax
-    1c13:	89 45 fc             	mov    %eax,-0x4(%rbp)
-    1c16:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1bf4:	89 7d ec             	mov    %edi,-0x14(%rbp)         # c
+    1bf7:	89 75 e8             	mov    %esi,-0x18(%rbp)         # a
+    1bfa:	89 55 e4             	mov    %edx,-0x1c(%rbp)         # b (0xe)
+    1bfd:	8b 45 e4             	mov    -0x1c(%rbp),%eax         # eax = b
+    1c00:	2b 45 e8             	sub    -0x18(%rbp),%eax         # eax = b
+    1c03:	89 c2                	mov    %eax,%edx                # edx = b
+    1c05:	c1 ea 1f             	shr    $0x1f,%edx               # edx = b-sign
+    1c08:	01 d0                	add    %edx,%eax                # eax = b +sign
+    1c0a:	d1 f8                	sar    %eax                     # eax = b+sign)/2
+    1c0c:	89 c2                	mov    %eax,%edx                # edx = 0x7
+    1c0e:	8b 45 e8             	mov    -0x18(%rbp),%eax         # eax = 0
+    1c11:	01 d0                	add    %edx,%eax                # eax = 0x7
+    1c13:	89 45 fc             	mov    %eax,-0x4(%rbp)          # a = 0x7
+    1c16:	8b 45 fc             	mov    -0x4(%rbp),%eax          # eax = 0x7
     1c19:	3b 45 ec             	cmp    -0x14(%rbp),%eax
-    1c1c:	7e 19                	jle    1c37 <func4+0x4f>
-    1c1e:	8b 45 fc             	mov    -0x4(%rbp),%eax
-    1c21:	8d 50 ff             	lea    -0x1(%rax),%edx
-    1c24:	8b 4d e8             	mov    -0x18(%rbp),%ecx
-    1c27:	8b 45 ec             	mov    -0x14(%rbp),%eax
+    1c1c:	7e 19                	jle    1c37 <func4+0x4f>        # 0x7 <= c jump
+    1c1e:	8b 45 fc             	mov    -0x4(%rbp),%eax          # eax = 0x7
+    1c21:	8d 50 ff             	lea    -0x1(%rax),%edx          # edx = 0x6
+    1c24:	8b 4d e8             	mov    -0x18(%rbp),%ecx         # ecx = 0
+    1c27:	8b 45 ec             	mov    -0x14(%rbp),%eax         # eax = c
     1c2a:	89 ce                	mov    %ecx,%esi
     1c2c:	89 c7                	mov    %eax,%edi
-    1c2e:	e8 b5 ff ff ff       	call   1be8 <func4>
+    1c2e:	e8 b5 ff ff ff       	call   1be8 <func4>             # func4(c,0,0x6)
     1c33:	01 c0                	add    %eax,%eax
     1c35:	eb 29                	jmp    1c60 <func4+0x78>
-    1c37:	8b 45 fc             	mov    -0x4(%rbp),%eax
-    1c3a:	3b 45 ec             	cmp    -0x14(%rbp),%eax
-    1c3d:	7d 1c                	jge    1c5b <func4+0x73>
-    1c3f:	8b 45 fc             	mov    -0x4(%rbp),%eax
-    1c42:	8d 48 01             	lea    0x1(%rax),%ecx
-    1c45:	8b 55 e4             	mov    -0x1c(%rbp),%edx
-    1c48:	8b 45 ec             	mov    -0x14(%rbp),%eax
-    1c4b:	89 ce                	mov    %ecx,%esi
-    1c4d:	89 c7                	mov    %eax,%edi
-    1c4f:	e8 94 ff ff ff       	call   1be8 <func4>
-    1c54:	01 c0                	add    %eax,%eax
-    1c56:	83 c0 01             	add    $0x1,%eax
+    1c37:	8b 45 fc             	mov    -0x4(%rbp),%eax           # eax = 0x7
+    1c3a:	3b 45 ec             	cmp    -0x14(%rbp),%eax          
+    1c3d:	7d 1c                	jge    1c5b <func4+0x73>        # 0x7 >= c jump
+    1c3f:	8b 45 fc             	mov    -0x4(%rbp),%eax          # eax = 0x7
+    1c42:	8d 48 01             	lea    0x1(%rax),%ecx           # ecx = 0x8
+    1c45:	8b 55 e4             	mov    -0x1c(%rbp),%edx         # edx = b
+    1c48:	8b 45 ec             	mov    -0x14(%rbp),%eax         # eax = c
+    1c4b:	89 ce                	mov    %ecx,%esi                # esi = 0x8
+    1c4d:	89 c7                	mov    %eax,%edi                # edi = b
+    1c4f:	e8 94 ff ff ff       	call   1be8 <func4>             # fun4(c,0x7,b)
+    1c54:	01 c0                	add    %eax,%eax                # eax = ret << 2
+    1c56:	83 c0 01             	add    $0x1,%eax                # eax = ret << 2 + 1
     1c59:	eb 05                	jmp    1c60 <func4+0x78>
-    1c5b:	b8 00 00 00 00       	mov    $0x0,%eax
+    1c5b:	b8 00 00 00 00       	mov    $0x0,%eax                # eax = 0
     1c60:	c9                   	leave  
     1c61:	c3                   	ret    
 
@@ -906,36 +906,36 @@ Disassembly of section .text:
     1c79:	00 00 
     1c7b:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
     1c7f:	31 c0                	xor    %eax,%eax
-    1c81:	48 8d 4d e8          	lea    -0x18(%rbp),%rcx
-    1c85:	48 8d 55 e4          	lea    -0x1c(%rbp),%rdx
-    1c89:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+    1c81:	48 8d 4d e8          	lea    -0x18(%rbp),%rcx         # d
+    1c85:	48 8d 55 e4          	lea    -0x1c(%rbp),%rdx         # c
+    1c89:	48 8b 45 d8          	mov    -0x28(%rbp),%rax         # char *input
     1c8d:	48 8d 35 d4 06 00 00 	lea    0x6d4(%rip),%rsi        # 2368 <_IO_stdin_used+0x368>
-    1c94:	48 89 c7             	mov    %rax,%rdi
-    1c97:	b8 00 00 00 00       	mov    $0x0,%eax
+    1c94:	48 89 c7             	mov    %rax,%rdi                # rdi = input
+    1c97:	b8 00 00 00 00       	mov    $0x0,%eax                # eax = 0
     1c9c:	e8 bf f4 ff ff       	call   1160 <__isoc99_sscanf@plt>
-    1ca1:	89 45 ec             	mov    %eax,-0x14(%rbp)
-    1ca4:	83 7d ec 02          	cmpl   $0x2,-0x14(%rbp)
-    1ca8:	75 0f                	jne    1cb9 <phase_4+0x57>
-    1caa:	8b 45 e4             	mov    -0x1c(%rbp),%eax
-    1cad:	85 c0                	test   %eax,%eax
-    1caf:	78 08                	js     1cb9 <phase_4+0x57>
-    1cb1:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+    1ca1:	89 45 ec             	mov    %eax,-0x14(%rbp)         # b = eax //返回值，读入的个数
+    1ca4:	83 7d ec 02          	cmpl   $0x2,-0x14(%rbp)         # b == 0x2
+    1ca8:	75 0f                	jne    1cb9 <phase_4+0x57>      # b != 0x2 bomb
+    1caa:	8b 45 e4             	mov    -0x1c(%rbp),%eax         # eax = c
+    1cad:	85 c0                	test   %eax,%eax                
+    1caf:	78 08                	js     1cb9 <phase_4+0x57>      # 负数 jump
+    1cb1:	8b 45 e4             	mov    -0x1c(%rbp),%eax         # eax = c
     1cb4:	83 f8 0e             	cmp    $0xe,%eax
-    1cb7:	7e 05                	jle    1cbe <phase_4+0x5c>
+    1cb7:	7e 05                	jle    1cbe <phase_4+0x5c>      # c <= 0xe jump //14
     1cb9:	e8 ba fc ff ff       	call   1978 <explode_bomb>
-    1cbe:	c7 45 f0 07 00 00 00 	movl   $0x7,-0x10(%rbp)
-    1cc5:	8b 45 e4             	mov    -0x1c(%rbp),%eax
-    1cc8:	ba 0e 00 00 00       	mov    $0xe,%edx
-    1ccd:	be 00 00 00 00       	mov    $0x0,%esi
-    1cd2:	89 c7                	mov    %eax,%edi
-    1cd4:	e8 0f ff ff ff       	call   1be8 <func4>
-    1cd9:	89 45 f4             	mov    %eax,-0xc(%rbp)
-    1cdc:	8b 45 f4             	mov    -0xc(%rbp),%eax
+    1cbe:	c7 45 f0 07 00 00 00 	movl   $0x7,-0x10(%rbp)         # a = 0x7
+    1cc5:	8b 45 e4             	mov    -0x1c(%rbp),%eax         # eax = c
+    1cc8:	ba 0e 00 00 00       	mov    $0xe,%edx                # edx = 0xe
+    1ccd:	be 00 00 00 00       	mov    $0x0,%esi                # esi = 0
+    1cd2:	89 c7                	mov    %eax,%edi                # edi = c
+    1cd4:	e8 0f ff ff ff       	call   1be8 <func4>             # eax = ret
+    1cd9:	89 45 f4             	mov    %eax,-0xc(%rbp)          # a = ret
+    1cdc:	8b 45 f4             	mov    -0xc(%rbp),%eax          # eax = ret
     1cdf:	3b 45 f0             	cmp    -0x10(%rbp),%eax
-    1ce2:	75 08                	jne    1cec <phase_4+0x8a>
-    1ce4:	8b 45 e8             	mov    -0x18(%rbp),%eax
-    1ce7:	39 45 f0             	cmp    %eax,-0x10(%rbp)
-    1cea:	74 05                	je     1cf1 <phase_4+0x8f>
+    1ce2:	75 08                	jne    1cec <phase_4+0x8a>      # ret != 0x7 jump
+    1ce4:	8b 45 e8             	mov    -0x18(%rbp),%eax         # eax = d
+    1ce7:	39 45 f0             	cmp    %eax,-0x10(%rbp)         
+    1cea:	74 05                	je     1cf1 <phase_4+0x8f>      # d == a jump
     1cec:	e8 87 fc ff ff       	call   1978 <explode_bomb>
     1cf1:	90                   	nop
     1cf2:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
@@ -956,33 +956,33 @@ Disassembly of section .text:
     1d1f:	00 00 
     1d21:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
     1d25:	31 c0                	xor    %eax,%eax
-    1d27:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
-    1d2b:	48 89 c7             	mov    %rax,%rdi
-    1d2e:	e8 3a f9 ff ff       	call   166d <string_length>
-    1d33:	89 45 ec             	mov    %eax,-0x14(%rbp)
-    1d36:	83 7d ec 06          	cmpl   $0x6,-0x14(%rbp)
-    1d3a:	74 05                	je     1d41 <phase_5+0x39>
+    1d27:	48 8b 45 d8          	mov    -0x28(%rbp),%rax         # rax = input
+    1d2b:	48 89 c7             	mov    %rax,%rdi                # rid = input
+    1d2e:	e8 3a f9 ff ff       	call   166d <string_length>     # eax = length
+    1d33:	89 45 ec             	mov    %eax,-0x14(%rbp)         # a = length
+    1d36:	83 7d ec 06          	cmpl   $0x6,-0x14(%rbp)         
+    1d3a:	74 05                	je     1d41 <phase_5+0x39>      # a = length == 0x6 jump
     1d3c:	e8 37 fc ff ff       	call   1978 <explode_bomb>
-    1d41:	c7 45 e8 00 00 00 00 	movl   $0x0,-0x18(%rbp)
-    1d48:	eb 30                	jmp    1d7a <phase_5+0x72>
-    1d4a:	8b 45 e8             	mov    -0x18(%rbp),%eax
-    1d4d:	48 63 d0             	movslq %eax,%rdx
-    1d50:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
-    1d54:	48 01 d0             	add    %rdx,%rax
-    1d57:	0f b6 00             	movzbl (%rax),%eax
-    1d5a:	0f be c0             	movsbl %al,%eax
-    1d5d:	83 e0 0f             	and    $0xf,%eax
-    1d60:	48 98                	cltq   
-    1d62:	48 8d 15 c7 25 00 00 	lea    0x25c7(%rip),%rdx        # 4330 <array.0>
-    1d69:	0f b6 14 10          	movzbl (%rax,%rdx,1),%edx
-    1d6d:	8b 45 e8             	mov    -0x18(%rbp),%eax
+    1d41:	c7 45 e8 00 00 00 00 	movl   $0x0,-0x18(%rbp)         # b = 0
+    1d48:	eb 30                	jmp    1d7a <phase_5+0x72>      # jump
+    1d4a:	8b 45 e8             	mov    -0x18(%rbp),%eax         # eax = b 
+    1d4d:	48 63 d0             	movslq %eax,%rdx                # rdx = b
+    1d50:	48 8b 45 d8          	mov    -0x28(%rbp),%rax         # rax = input[0]
+    1d54:	48 01 d0             	add    %rdx,%rax                # rax = input[0] + b
+    1d57:	0f b6 00             	movzbl (%rax),%eax              # eax = *rax
+    1d5a:	0f be c0             	movsbl %al,%eax                 # eax 低8位带符号
+    1d5d:	83 e0 0f             	and    $0xf,%eax                # eax 低4位
+    1d60:	48 98                	cltq                            # 扩展 eax
+    1d62:	48 8d 15 c7 25 00 00 	lea    0x25c7(%rip),%rdx        # 4330 <array.0> rdx = array[0]
+    1d69:	0f b6 14 10          	movzbl (%rax,%rdx,1),%edx       # edx = rax + array[0]
+    1d6d:	8b 45 e8             	mov    -0x18(%rbp),%eax         # eax = b
     1d70:	48 98                	cltq   
-    1d72:	88 54 05 f1          	mov    %dl,-0xf(%rbp,%rax,1)
-    1d76:	83 45 e8 01          	addl   $0x1,-0x18(%rbp)
+    1d72:	88 54 05 f1          	mov    %dl,-0xf(%rbp,%rax,1)    # arr[b] = dl
+    1d76:	83 45 e8 01          	addl   $0x1,-0x18(%rbp)         # b++
     1d7a:	83 7d e8 05          	cmpl   $0x5,-0x18(%rbp)
-    1d7e:	7e ca                	jle    1d4a <phase_5+0x42>
-    1d80:	c6 45 f7 00          	movb   $0x0,-0x9(%rbp)
-    1d84:	48 8d 45 f1          	lea    -0xf(%rbp),%rax
+    1d7e:	7e ca                	jle    1d4a <phase_5+0x42>      # b <= 0x5 jump
+    1d80:	c6 45 f7 00          	movb   $0x0,-0x9(%rbp)          # c = 0
+    1d84:	48 8d 45 f1          	lea    -0xf(%rbp),%rax          # rax = &arr[0]
     1d88:	48 8d 15 09 06 00 00 	lea    0x609(%rip),%rdx        # 2398 <_IO_stdin_used+0x398>
     1d8f:	48 89 d6             	mov    %rdx,%rsi
     1d92:	48 89 c7             	mov    %rax,%rdi
@@ -1009,107 +1009,107 @@ Disassembly of section .text:
     1dd7:	00 00 
     1dd9:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
     1ddd:	31 c0                	xor    %eax,%eax
-    1ddf:	48 8d 05 9a 25 00 00 	lea    0x259a(%rip),%rax        # 4380 <node1>
-    1de6:	48 89 45 98          	mov    %rax,-0x68(%rbp)
-    1dea:	48 8d 55 a0          	lea    -0x60(%rbp),%rdx
-    1dee:	48 8b 85 78 ff ff ff 	mov    -0x88(%rbp),%rax
-    1df5:	48 89 d6             	mov    %rdx,%rsi
-    1df8:	48 89 c7             	mov    %rax,%rdi
-    1dfb:	e8 fe f7 ff ff       	call   15fe <read_six_numbers>
-    1e00:	c7 45 88 00 00 00 00 	movl   $0x0,-0x78(%rbp)
-    1e07:	eb 54                	jmp    1e5d <phase_6+0xa3>
-    1e09:	8b 45 88             	mov    -0x78(%rbp),%eax
-    1e0c:	48 98                	cltq   
-    1e0e:	8b 44 85 a0          	mov    -0x60(%rbp,%rax,4),%eax
-    1e12:	85 c0                	test   %eax,%eax
-    1e14:	7e 0e                	jle    1e24 <phase_6+0x6a>
-    1e16:	8b 45 88             	mov    -0x78(%rbp),%eax
+    1ddf:	48 8d 05 9a 25 00 00 	lea    0x259a(%rip),%rax        # 4380 <node1> rax = node1
+    1de6:	48 89 45 98          	mov    %rax,-0x68(%rbp)         # n = node1
+    1dea:	48 8d 55 a0          	lea    -0x60(%rbp),%rdx         # rdx = &a[0]
+    1dee:	48 8b 85 78 ff ff ff 	mov    -0x88(%rbp),%rax         # rax = input
+    1df5:	48 89 d6             	mov    %rdx,%rsi                # rsi = &a[0]
+    1df8:	48 89 c7             	mov    %rax,%rdi                # rdi = input
+    1dfb:	e8 fe f7 ff ff       	call   15fe <read_six_numbers>  # read_six_number(input,a)
+    1e00:	c7 45 88 00 00 00 00 	movl   $0x0,-0x78(%rbp)         # b = 0
+    1e07:	eb 54                	jmp    1e5d <phase_6+0xa3>      # jump {
+    1e09:	8b 45 88             	mov    -0x78(%rbp),%eax         # eax = b
+    1e0c:	48 98                	cltq                            
+    1e0e:	8b 44 85 a0          	mov    -0x60(%rbp,%rax,4),%eax  # eax = a[b]
+    1e12:	85 c0                	test   %eax,%eax                # 
+    1e14:	7e 0e                	jle    1e24 <phase_6+0x6a>      # eax <= 0 bomb
+    1e16:	8b 45 88             	mov    -0x78(%rbp),%eax         # eax = b
     1e19:	48 98                	cltq   
-    1e1b:	8b 44 85 a0          	mov    -0x60(%rbp,%rax,4),%eax
-    1e1f:	83 f8 06             	cmp    $0x6,%eax
-    1e22:	7e 05                	jle    1e29 <phase_6+0x6f>
-    1e24:	e8 4f fb ff ff       	call   1978 <explode_bomb>
-    1e29:	8b 45 88             	mov    -0x78(%rbp),%eax
-    1e2c:	83 c0 01             	add    $0x1,%eax
-    1e2f:	89 45 8c             	mov    %eax,-0x74(%rbp)
-    1e32:	eb 1f                	jmp    1e53 <phase_6+0x99>
-    1e34:	8b 45 88             	mov    -0x78(%rbp),%eax
+    1e1b:	8b 44 85 a0          	mov    -0x60(%rbp,%rax,4),%eax  # eax = a[b]
+    1e1f:	83 f8 06             	cmp    $0x6,%eax                # 
+    1e22:	7e 05                	jle    1e29 <phase_6+0x6f>      # eax <= 6 jump
+    1e24:	e8 4f fb ff ff       	call   1978 <explode_bomb>      #
+    1e29:	8b 45 88             	mov    -0x78(%rbp),%eax         # eax = b
+    1e2c:	83 c0 01             	add    $0x1,%eax                # eax = b + 1
+    1e2f:	89 45 8c             	mov    %eax,-0x74(%rbp)         # c = b + 1
+    1e32:	eb 1f                	jmp    1e53 <phase_6+0x99>      # jump {
+    1e34:	8b 45 88             	mov    -0x78(%rbp),%eax         # eax = b
     1e37:	48 98                	cltq   
-    1e39:	8b 54 85 a0          	mov    -0x60(%rbp,%rax,4),%edx
-    1e3d:	8b 45 8c             	mov    -0x74(%rbp),%eax
+    1e39:	8b 54 85 a0          	mov    -0x60(%rbp,%rax,4),%edx  # edx = a[b]
+    1e3d:	8b 45 8c             	mov    -0x74(%rbp),%eax         # eax = c
     1e40:	48 98                	cltq   
-    1e42:	8b 44 85 a0          	mov    -0x60(%rbp,%rax,4),%eax
-    1e46:	39 c2                	cmp    %eax,%edx
-    1e48:	75 05                	jne    1e4f <phase_6+0x95>
+    1e42:	8b 44 85 a0          	mov    -0x60(%rbp,%rax,4),%eax  # eax = a[c]
+    1e46:	39 c2                	cmp    %eax,%edx                #
+    1e48:	75 05                	jne    1e4f <phase_6+0x95>      # a[c] != a[b] jump
     1e4a:	e8 29 fb ff ff       	call   1978 <explode_bomb>
-    1e4f:	83 45 8c 01          	addl   $0x1,-0x74(%rbp)
-    1e53:	83 7d 8c 05          	cmpl   $0x5,-0x74(%rbp)
-    1e57:	7e db                	jle    1e34 <phase_6+0x7a>
+    1e4f:	83 45 8c 01          	addl   $0x1,-0x74(%rbp)         # c++
+    1e53:	83 7d 8c 05          	cmpl   $0x5,-0x74(%rbp)         #
+    1e57:	7e db                	jle    1e34 <phase_6+0x7a>      # c <= 0x5 jump }
     1e59:	83 45 88 01          	addl   $0x1,-0x78(%rbp)
-    1e5d:	83 7d 88 05          	cmpl   $0x5,-0x78(%rbp)
-    1e61:	7e a6                	jle    1e09 <phase_6+0x4f>
-    1e63:	c7 45 88 00 00 00 00 	movl   $0x0,-0x78(%rbp)
-    1e6a:	eb 41                	jmp    1ead <phase_6+0xf3>
-    1e6c:	48 8b 45 98          	mov    -0x68(%rbp),%rax
-    1e70:	48 89 45 90          	mov    %rax,-0x70(%rbp)
-    1e74:	c7 45 8c 01 00 00 00 	movl   $0x1,-0x74(%rbp)
-    1e7b:	eb 10                	jmp    1e8d <phase_6+0xd3>
-    1e7d:	48 8b 45 90          	mov    -0x70(%rbp),%rax
-    1e81:	48 8b 40 08          	mov    0x8(%rax),%rax
-    1e85:	48 89 45 90          	mov    %rax,-0x70(%rbp)
-    1e89:	83 45 8c 01          	addl   $0x1,-0x74(%rbp)
-    1e8d:	8b 45 88             	mov    -0x78(%rbp),%eax
+    1e5d:	83 7d 88 05          	cmpl   $0x5,-0x78(%rbp)         # 
+    1e61:	7e a6                	jle    1e09 <phase_6+0x4f>      # b <= 0x5 jump }
+    1e63:	c7 45 88 00 00 00 00 	movl   $0x0,-0x78(%rbp)         # b = 0
+    1e6a:	eb 41                	jmp    1ead <phase_6+0xf3>      # jump {
+    1e6c:	48 8b 45 98          	mov    -0x68(%rbp),%rax         # rax = n
+    1e70:	48 89 45 90          	mov    %rax,-0x70(%rbp)         # d = n
+    1e74:	c7 45 8c 01 00 00 00 	movl   $0x1,-0x74(%rbp)         # c = 0x1
+    1e7b:	eb 10                	jmp    1e8d <phase_6+0xd3>      # jump {
+    1e7d:	48 8b 45 90          	mov    -0x70(%rbp),%rax         # rax = d
+    1e81:	48 8b 40 08          	mov    0x8(%rax),%rax           # rax = d + 0x8
+    1e85:	48 89 45 90          	mov    %rax,-0x70(%rbp)         # d = d + 0x8
+    1e89:	83 45 8c 01          	addl   $0x1,-0x74(%rbp)         # c++
+    1e8d:	8b 45 88             	mov    -0x78(%rbp),%eax         # eax = b
     1e90:	48 98                	cltq   
-    1e92:	8b 44 85 a0          	mov    -0x60(%rbp,%rax,4),%eax
-    1e96:	39 45 8c             	cmp    %eax,-0x74(%rbp)
-    1e99:	7c e2                	jl     1e7d <phase_6+0xc3>
-    1e9b:	8b 45 88             	mov    -0x78(%rbp),%eax
+    1e92:	8b 44 85 a0          	mov    -0x60(%rbp,%rax,4),%eax  # eax = a[b]
+    1e96:	39 45 8c             	cmp    %eax,-0x74(%rbp)         # 
+    1e99:	7c e2                	jl     1e7d <phase_6+0xc3>      # c < a[b] jump }
+    1e9b:	8b 45 88             	mov    -0x78(%rbp),%eax         # eax = b
     1e9e:	48 98                	cltq   
-    1ea0:	48 8b 55 90          	mov    -0x70(%rbp),%rdx
-    1ea4:	48 89 54 c5 c0       	mov    %rdx,-0x40(%rbp,%rax,8)
-    1ea9:	83 45 88 01          	addl   $0x1,-0x78(%rbp)
-    1ead:	83 7d 88 05          	cmpl   $0x5,-0x78(%rbp)
-    1eb1:	7e b9                	jle    1e6c <phase_6+0xb2>
-    1eb3:	48 8b 45 c0          	mov    -0x40(%rbp),%rax
-    1eb7:	48 89 45 98          	mov    %rax,-0x68(%rbp)
-    1ebb:	48 8b 45 98          	mov    -0x68(%rbp),%rax
-    1ebf:	48 89 45 90          	mov    %rax,-0x70(%rbp)
-    1ec3:	c7 45 88 01 00 00 00 	movl   $0x1,-0x78(%rbp)
-    1eca:	eb 22                	jmp    1eee <phase_6+0x134>
-    1ecc:	8b 45 88             	mov    -0x78(%rbp),%eax
+    1ea0:	48 8b 55 90          	mov    -0x70(%rbp),%rdx         # rdx = d
+    1ea4:	48 89 54 c5 c0       	mov    %rdx,-0x40(%rbp,%rax,8)  # al[b] = d
+    1ea9:	83 45 88 01          	addl   $0x1,-0x78(%rbp)         # b++
+    1ead:	83 7d 88 05          	cmpl   $0x5,-0x78(%rbp)         #
+    1eb1:	7e b9                	jle    1e6c <phase_6+0xb2>      # b <= 0x5 jump }   //按照数组a的顺序排列node1的元素
+    1eb3:	48 8b 45 c0          	mov    -0x40(%rbp),%rax         # rax = &al[0]
+    1eb7:	48 89 45 98          	mov    %rax,-0x68(%rbp)         # n = &al[0]
+    1ebb:	48 8b 45 98          	mov    -0x68(%rbp),%rax         # rax = n
+    1ebf:	48 89 45 90          	mov    %rax,-0x70(%rbp)         # d = n
+    1ec3:	c7 45 88 01 00 00 00 	movl   $0x1,-0x78(%rbp)         # b = 1
+    1eca:	eb 22                	jmp    1eee <phase_6+0x134>     # jump {
+    1ecc:	8b 45 88             	mov    -0x78(%rbp),%eax         # eax = b
     1ecf:	48 98                	cltq   
-    1ed1:	48 8b 54 c5 c0       	mov    -0x40(%rbp,%rax,8),%rdx
-    1ed6:	48 8b 45 90          	mov    -0x70(%rbp),%rax
-    1eda:	48 89 50 08          	mov    %rdx,0x8(%rax)
-    1ede:	48 8b 45 90          	mov    -0x70(%rbp),%rax
-    1ee2:	48 8b 40 08          	mov    0x8(%rax),%rax
-    1ee6:	48 89 45 90          	mov    %rax,-0x70(%rbp)
-    1eea:	83 45 88 01          	addl   $0x1,-0x78(%rbp)
-    1eee:	83 7d 88 05          	cmpl   $0x5,-0x78(%rbp)
-    1ef2:	7e d8                	jle    1ecc <phase_6+0x112>
-    1ef4:	48 8b 45 90          	mov    -0x70(%rbp),%rax
-    1ef8:	48 c7 40 08 00 00 00 	movq   $0x0,0x8(%rax)
+    1ed1:	48 8b 54 c5 c0       	mov    -0x40(%rbp,%rax,8),%rdx  # rdx = al[b]
+    1ed6:	48 8b 45 90          	mov    -0x70(%rbp),%rax         # rax = d
+    1eda:	48 89 50 08          	mov    %rdx,0x8(%rax)           # *(d + 0x8) = al[b]
+    1ede:	48 8b 45 90          	mov    -0x70(%rbp),%rax         # rax = d
+    1ee2:	48 8b 40 08          	mov    0x8(%rax),%rax           # rax = *(d + 0x8)
+    1ee6:	48 89 45 90          	mov    %rax,-0x70(%rbp)         # d = *(d + 0x8)
+    1eea:	83 45 88 01          	addl   $0x1,-0x78(%rbp)         # b++
+    1eee:	83 7d 88 05          	cmpl   $0x5,-0x78(%rbp)         #
+    1ef2:	7e d8                	jle    1ecc <phase_6+0x112>     # b <= 0x5 jump }
+    1ef4:	48 8b 45 90          	mov    -0x70(%rbp),%rax         # rax = d
+    1ef8:	48 c7 40 08 00 00 00 	movq   $0x0,0x8(%rax)           # d[1] = 0
     1eff:	00 
-    1f00:	48 8b 45 98          	mov    -0x68(%rbp),%rax
-    1f04:	48 89 45 90          	mov    %rax,-0x70(%rbp)
-    1f08:	c7 45 88 00 00 00 00 	movl   $0x0,-0x78(%rbp)
-    1f0f:	eb 29                	jmp    1f3a <phase_6+0x180>
-    1f11:	48 8b 45 90          	mov    -0x70(%rbp),%rax
-    1f15:	8b 10                	mov    (%rax),%edx
-    1f17:	48 8b 45 90          	mov    -0x70(%rbp),%rax
-    1f1b:	48 8b 40 08          	mov    0x8(%rax),%rax
-    1f1f:	8b 00                	mov    (%rax),%eax
-    1f21:	39 c2                	cmp    %eax,%edx
-    1f23:	7d 05                	jge    1f2a <phase_6+0x170>
+    1f00:	48 8b 45 98          	mov    -0x68(%rbp),%rax         # rax = n
+    1f04:	48 89 45 90          	mov    %rax,-0x70(%rbp)         # d = n
+    1f08:	c7 45 88 00 00 00 00 	movl   $0x0,-0x78(%rbp)         # b = 0
+    1f0f:	eb 29                	jmp    1f3a <phase_6+0x180>     # jump {
+    1f11:	48 8b 45 90          	mov    -0x70(%rbp),%rax         # rax = d = n
+    1f15:	8b 10                	mov    (%rax),%edx              # edx = *d[0]
+    1f17:	48 8b 45 90          	mov    -0x70(%rbp),%rax         # rax = d
+    1f1b:	48 8b 40 08          	mov    0x8(%rax),%rax           # rax = d[1]
+    1f1f:	8b 00                	mov    (%rax),%eax              # eax = *d[1]
+    1f21:	39 c2                	cmp    %eax,%edx                #
+    1f23:	7d 05                	jge    1f2a <phase_6+0x170>     # d[0] >= *d[1] jump
     1f25:	e8 4e fa ff ff       	call   1978 <explode_bomb>
-    1f2a:	48 8b 45 90          	mov    -0x70(%rbp),%rax
-    1f2e:	48 8b 40 08          	mov    0x8(%rax),%rax
-    1f32:	48 89 45 90          	mov    %rax,-0x70(%rbp)
-    1f36:	83 45 88 01          	addl   $0x1,-0x78(%rbp)
-    1f3a:	83 7d 88 04          	cmpl   $0x4,-0x78(%rbp)
-    1f3e:	7e d1                	jle    1f11 <phase_6+0x157>
+    1f2a:	48 8b 45 90          	mov    -0x70(%rbp),%rax         # rax = d
+    1f2e:	48 8b 40 08          	mov    0x8(%rax),%rax           # rax = d[1]
+    1f32:	48 89 45 90          	mov    %rax,-0x70(%rbp)         # d = d[1]
+    1f36:	83 45 88 01          	addl   $0x1,-0x78(%rbp)         # b++
+    1f3a:	83 7d 88 04          	cmpl   $0x4,-0x78(%rbp)         #
+    1f3e:	7e d1                	jle    1f11 <phase_6+0x157>     # b <= 4 jump }
     1f40:	90                   	nop
-    1f41:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+    1f41:	48 8b 45 f8          	mov    -0x8(%rbp),%rax 
     1f45:	64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax
     1f4c:	00 00 
     1f4e:	74 05                	je     1f55 <phase_6+0x19b>
