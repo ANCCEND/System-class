@@ -1,0 +1,5 @@
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+    12: 0000000000000000     4 OBJECT  GLOBAL DEFAULT    3 init_gv1
+    14: 0000000000000008    12 OBJECT  GLOBAL DEFAULT    3 init_gstr1
+    16: 0000000000000018    12 OBJECT  GLOBAL DEFAULT    3 init_garr1
+    24: 0000000000000024     4 OBJECT  GLOBAL DEFAULT    3 gv
